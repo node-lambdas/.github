@@ -66,7 +66,7 @@ cat README.md | fn markdown
 
 ## Available Node.js micro services
 
-Missing something here? You can also [request a new service](https://docs.google.com/forms/d/e/1FAIpQLSdH38n0y65NZyAc3oj_T6KQhYtlt3BruvZq21BzPkiMVYtl5w/viewform?usp=sf_link).
+> Missing something here? Open an issue and [request a new service](https://github.com/node-lambdas/discover/issues).
 
 - [base64](https://base64.jsfn.run)
 - [format-json](https://format-json.jsfn.run)
