@@ -2,57 +2,40 @@
 
 ![Node Lambdas](https://avatars0.githubusercontent.com/u/69599650?s=100&v=4)
 
-## What is this?
+## Introduction
 
-Just a tiny JS program that pipes the input/output of your CLI commands to a cloud microservice via HTTPS.
+`node-lambdas` is a collection of tiny Node.JS servers that implement common modules or services as API's for ease of composition.
 
+**Why?**
+
+Quite often I need to do simple tasks like formatting a JSON file or decoding a base64 string. Sometimes I need that on my phone or in a restricted environment.
+
+## Using with @node-lambdas/cli
+
+`@node-lambdas/cli` is a terminal script that pipes the input/output of your CLI commands to a cloud microservice via HTTPS.
+
+The general idea of any function is the following:
 ```
-            input
-              v
-  https://[function-name].jsfn.run/[arguments]
-              v
-            output
+input >> POST https://[service].jsfn.run/[function] >> output
 ```
 
-Think of YAML, for example.
-You have a JSON and you want to convert it to YAML from your CLI.
-
-So you read your JSON file with `cat`, pipe it to the `yaml` command and get the output back in the command line.
-
-But oh wait, there's no `yaml` program in your computer!
-
-Well, you could install some package in your machine... or you can pipe your data directly to a publicly available `yaml` command online!
-
-## Why
-
-Quite often we need to do simple tasks like formatting a JSON file or decoding a base64 string.
-Usually we either install some package or go to a website dedicated to that.
-
-But what if you need that in an automation script?
-
-## Using with cURL
+For example: you have a JSON and you want to convert it to YAML from your terminal, but you don't want or cannot install a program for that.
 
 ```bash
-cat your.json | curl -X POST https://yaml.jsfn.run --data @-
+cat file.yaml | fn yaml decode | tee file.json
 ```
 
-## Using the `fn` cli
+## Can I use it with cURL?
 
-Start by installing the module globally:
+Absolutely!
 
+```bash
+curl -X POST https://yaml.jsfn.run -d @file.json
 ```
-npm i -g @node-lambdas/cli
-```
-
-Make sure `fn` can be reached from your shell. If not, you should check your `$PATH` to see if your global npm folder is added there.
-To check, just run `fn`.
-
-Now you can use the CLI to invoke any of the available microservices.
 
 ### Examples
 
 ```bash
-
 # convert JSON to YAML
 cat your.json | fn yaml
 
@@ -66,12 +49,6 @@ cat README.md | fn markdown
 
 ## Available Node.js micro services
 
-> Missing something here? Open an issue and [request a new service](https://github.com/node-lambdas/discover/issues).
+Use `fn discover` to get a list of available services.
 
-- [base64](https://base64.jsfn.run)
-- [format-json](https://format-json.jsfn.run)
-- [markdown](https://markdown.jsfn.run)
-- [md5](https://md5.jsfn.run)
-- [sha](https://sha.jsfn.run)
-- [yaml](https://yaml.jsfn.run)
-- [random](https://random.jsfn.run)
+> Missing a function? Open an issue and [request a new one](https://github.com/node-lambdas/discover/issues).
