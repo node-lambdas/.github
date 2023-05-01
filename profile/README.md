@@ -4,25 +4,27 @@
 
 ## Introduction
 
-`node-lambdas` is a collection of tiny Node.JS servers that implement common modules or services as API's for ease of composition.
+`node-lambdas` is a collection of tiny Node.JS servers that implement common NPM modules or HTTP services as API's for convenience.
 
 **Why?**
 
-Quite often I need to do simple tasks like formatting a JSON file or decoding a base64 string. Sometimes I need that on my phone or in a restricted environment.
+Quite often I need to do simple tasks, like formatting a JSON file or decoding a base64 string.
+Sometimes I need that on my phone or in a restricted environment.
 
 ## Using with @node-lambdas/cli
 
-`@node-lambdas/cli` is a terminal script that pipes the input/output of your CLI commands to a cloud microservice via HTTPS.
+`@node-lambdas/cli` is a terminal script that pipes the input/output of your CLI commands to an HTTP server.
 
 The general idea of any function is the following:
+
 ```
 input >> POST https://[service].jsfn.run/[function] >> output
 ```
 
-For example: you have a JSON and you want to convert it to YAML from your terminal, but you don't want or cannot install a program for that.
+For example: you have a JSON and you want to convert it to YAML, but you cannot install a program for that.
 
 ```bash
-cat file.yaml | fn yaml decode | tee file.json
+cat file.json | fn yaml encode | tee file.yml
 ```
 
 ## Can I use it with cURL?
@@ -30,7 +32,7 @@ cat file.yaml | fn yaml decode | tee file.json
 Absolutely!
 
 ```bash
-curl -X POST https://yaml.jsfn.run -d @file.json
+curl -d @file.json https://yaml.jsfn.run/encode
 ```
 
 ### Examples
